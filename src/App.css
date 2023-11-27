@@ -41,6 +41,16 @@
   align-items: center;
   margin:1rem;
 }
+.box{
+  width:100px;
+  align-items: center;
+  align-content: center;
+  text-align: center;
+  padding:0.4dvw;
+}
+.box Input{
+  padding-bottom: 2%;
+}
 section{
   width: 65dvw;
   margin:auto;
@@ -50,8 +60,20 @@ section{
   padding: 2%;
   overflow-x: auto;
 }
-th, td {
+.basics th, .basics td {
   border: 1px solid #dddddd;
   text-align: left;
   padding: 8px;
+}
+.scroll{
+  overflow-x: auto;
+}
+.titles{
+  width: 20%;
+  align-items:start;
+  display:flex;
+  flex-direction: column;
+}
+.titles label{
+  height: 2.25rem;
 }

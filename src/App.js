@@ -21,6 +21,21 @@ function App() {
   const [TERd, setTERd] = useState(0);
   const [wdTER, setwdTER] = useState(0)
 
+
+  //for CHO,CHON, fat Distribution
+  const [pCCF, setpCCF] = useState([0,0,0]);
+  const [NPC, setNPC] = useState([0,0,0]);
+  const [finalCCF, setfinalCCF] = useState([0,0,0]);
+  const [distCCF, setdistCCF] = useState(-1);
+
+  //for exchhange rates
+  const [Breakfast, setBreakfast] = useState([0,0,0,0,0,0,0,0,0,0,0,0,0,0]);
+  const [AM, setAM] = useState([0,0,0,0,0,0,0,0,0,0,0,0,0,0]);
+  const [Lunch, setLunch] = useState([0,0,0,0,0,0,0,0,0,0,0,0,0,0]);
+  const [PM, setPM] = useState([0,0,0,0,0,0,0,0,0,0,0,0,0,0]);
+  const [Dinner, setDinner] = useState([0,0,0,0,0,0,0,0,0,0,0,0,0,0]);
+  const [BS, setBS] = useState([0,0,0,0,0,0,0,0,0,0,0,0,0,0]);
+
   const [DBW,setDBW]=useState(0);
   const[Age,setAge]=useState({year:0,month:0});
   const [sex,setSex]=useState("M");
@@ -351,6 +366,176 @@ function App() {
             TER/TEA used : {finalTER};<br/>
             Final TEA: {finalTER+isLactating*500+isPregnant*300} kCal 
           </h4>}
+        </div>
+        <div>
+          <h2>DISTRIBUTING TEA/TER into CHO, CHON, Fat</h2>
+          <div className='flex'>
+            <div>
+              <h3>Method 1: %Distribution</h3>
+              <div className='flex'>Carbohydrates: <Input type='number' inputProps={{ min: 0 }} max={100} onChange={(_,value)=>{setpCCF([(Math.round(((finalTER*_.target.value/100)/4)/5)*5),pCCF[1],pCCF[2]]);}}/></div>
+              <div className='flex'>Protein: <Input type='number' inputProps={{ min: 0 }} max={100} onChange={(_,value)=>setpCCF([pCCF[0],(Math.round(((finalTER*_.target.value/100)/4)/5)*5),pCCF[2]])}/></div>
+              <div className='flex'>Fat: <Input type='number' inputProps={{ min: 0 }} max={100} onChange={(_,value)=>setpCCF([pCCF[0],pCCF[1],(Math.round(((finalTER*_.target.value/100)/9)/5)*5)])}/></div>
+            </div>
+            <div>
+              <h3>Method 2: NPC Method</h3>
+            </div>
+            
+          </div>
+          <h3> Final Diet RX</h3>
+            <Select defaultValue={-1} sx={{width:"20%"}} onChange={(_,value)=>{
+              if (value===1){
+                setfinalCCF(NPC);
+              }
+              else if(value===0){
+                setfinalCCF(pCCF);
+              }
+              setdistCCF(value);
+            }}>
+              <Option value={0}>% Distribution</Option>
+              <Option value={1}>NPC</Option>
+            </Select>
+            {
+              (distCCF===-1)?"Please Select a Distribution":
+              <>
+              <div className='flex'>ENERGY: {finalTER} kCal</div>
+            <div className='flex'>CHO: {finalCCF[0]}g</div>
+            <div className='flex'>CHON: {finalCCF[1]}g</div>
+            <div className='flex'>Fat: {finalCCF[2]}g</div>
+              </>
+            }
+        </div>
+      </section>
+      <section>
+        <h1> Exchange Calculator</h1>
+        <div className='flex contain'>
+          <div className='titles'>
+            <h3>Food</h3>
+            <label>Fresh Vegetables</label>
+            <label>Processed Vegetables</label>
+            <label>Fruit </label>
+            <label>Milk, whole</label>
+            <label> Milk, low fat </label>
+            <label> Milk, skim </label>
+            <label>Sugar </label>
+            <label> Rice, low protein</label>
+            <label> Rice, medium protein </label>
+            <label> Rice, high protein</label>
+            <label> Meat, low fat</label>
+            <label> Meat, med fat</label>
+            <label> Meat, high fat</label>
+            <label> Fat</label>
+
+          </div>
+          <div className='flex scroll'>
+            <div className='box'>
+              <h3>Breakfast</h3>
+              <Input type='number' placeholder='0' inputProps={{step:0.1}} onChange={(e)=>{if (e.target.value<0){e.target.value=0;} else{setBreakfast([e.target.value,0,0,0,0,0,0,0,0,0,0,0,0,0])}}}/>
+              <Input type='number'placeholder='0' step={0.1} onChange={(e)=>{if (e.target.value<0){e.target.value=0;} else{setBreakfast([0,e.target.value,0,0,0,0,0,0,0,0,0,0,0,0])}}}/>
+              <Input type='number' placeholder='0' step={0.1} onChange={(e)=>{if (e.target.value<0){e.target.value=0;} else{setBreakfast([0,0,e.target.value,0,0,0,0,0,0,0,0,0,0,0])}}}/>
+              <Input type='number' placeholder='0' step={0.1} onChange={(e)=>{if (e.target.value<0){e.target.value=0;} else{setBreakfast([0,0,0,e.target.value,0,0,0,0,0,0,0,0,0,0])}}}/>
+              <Input type='number' placeholder='0' step={0.1} onChange={(e)=>{if (e.target.value<0){e.target.value=0;} else{setBreakfast([0,0,0,0,e.target.value,0,0,0,0,0,0,0,0,0])}}}/>
+              <Input type='number' placeholder='0' step={0.1} onChange={(e)=>{if (e.target.value<0){e.target.value=0;} else{setBreakfast([0,0,0,0,0,e.target.value,0,0,0,0,0,0,0,0])}}}/>
+              <Input type='number' placeholder='0' step={0.1} onChange={(e)=>{if (e.target.value<0){e.target.value=0;} else{setBreakfast([0,0,0,0,0,0,e.target.value,0,0,0,0,0,0,0])}}}/>
+              <Input type='number' placeholder='0' step={0.1} onChange={(e)=>{if (e.target.value<0){e.target.value=0;} else{setBreakfast([0,0,0,0,0,0,0,e.target.value,0,0,0,0,0,0])}}}/>
+              <Input type='number' placeholder='0' step={0.1} onChange={(e)=>{if (e.target.value<0){e.target.value=0;} else{setBreakfast([0,0,0,0,0,0,0,0,e.target.value,0,0,0,0,0])}}}/>
+              <Input type='number' placeholder='0' step={0.1} onChange={(e)=>{if (e.target.value<0){e.target.value=0;} else{setBreakfast([0,0,0,0,0,0,0,0,0,e.target.value,0,0,0,0])}}}/>
+              <Input type='number' placeholder='0' step={0.1} onChange={(e)=>{if (e.target.value<0){e.target.value=0;} else{setBreakfast([0,0,0,0,0,0,0,0,0,0,e.target.value,0,0,0])}}}/>
+              <Input type='number' placeholder='0' step={0.1} onChange={(e)=>{if (e.target.value<0){e.target.value=0;} else{setBreakfast([0,0,0,0,0,0,0,0,0,0,0,e.target.value,0,0])}}}/>
+              <Input type='number' placeholder='0' step={0.1} onChange={(e)=>{if (e.target.value<0){e.target.value=0;} else{setBreakfast([0,0,0,0,0,0,0,0,0,0,0,0,e.target.value,0])}}}/>
+              <Input type='number' placeholder='0' step={0.1} onChange={(e)=>{if (e.target.value<0){e.target.value=0;} else{setBreakfast([0,0,0,0,0,0,0,0,0,0,0,0,0,e.target.value])}}}/>
+            </div>
+
+            <div className='box'>
+              <h3>AM Snacks</h3>
+              <Input type='number' onChange={(e)=>{setAM([e.target.value,0,0,0,0,0,0,0,0,0,0,0,0,0])}}/>
+              <Input type='number' onChange={(e)=>{setAM([0,e.target.value,0,0,0,0,0,0,0,0,0,0,0,0])}}/>
+              <Input type='number' onChange={(e)=>{setAM([0,0,e.target.value,0,0,0,0,0,0,0,0,0,0,0])}}/>
+              <Input type='number' onChange={(e)=>{setAM([0,0,0,e.target.value,0,0,0,0,0,0,0,0,0,0])}}/>
+              <Input type='number' onChange={(e)=>{setAM([0,0,0,0,e.target.value,0,0,0,0,0,0,0,0,0])}}/>
+              <Input type='number' onChange={(e)=>{setAM([0,0,0,0,0,e.target.value,0,0,0,0,0,0,0,0])}}/>
+              <Input type='number' onChange={(e)=>{setAM([0,0,0,0,0,0,e.target.value,0,0,0,0,0,0,0])}}/>
+              <Input type='number' onChange={(e)=>{setAM([0,0,0,0,0,0,0,e.target.value,0,0,0,0,0,0])}}/>
+              <Input type='number' onChange={(e)=>{setAM([0,0,0,0,0,0,0,0,e.target.value,0,0,0,0,0])}}/>
+              <Input type='number' onChange={(e)=>{setAM([0,0,0,0,0,0,0,0,0,e.target.value,0,0,0,0])}}/>
+              <Input type='number' onChange={(e)=>{setAM([0,0,0,0,0,0,0,0,0,0,e.target.value,0,0,0])}}/>
+              <Input type='number' onChange={(e)=>{setAM([0,0,0,0,0,0,0,0,0,0,0,e.target.value,0,0])}}/>
+              <Input type='number' onChange={(e)=>{setAM([0,0,0,0,0,0,0,0,0,0,0,0,e.target.value,0])}}/>
+              <Input type='number' onChange={(e)=>{setAM([0,0,0,0,0,0,0,0,0,0,0,0,0,e.target.value])}}/>
+            </div>
+
+            <div className='box'>
+              <h3>Lunch</h3>
+              <Input type='number' onChange={(e)=>{setLunch([e.target.value,0,0,0,0,0,0,0,0,0,0,0,0,0])}}/>
+              <Input type='number' onChange={(e)=>{setLunch([0,e.target.value,0,0,0,0,0,0,0,0,0,0,0,0])}}/>
+              <Input type='number' onChange={(e)=>{setLunch([0,0,e.target.value,0,0,0,0,0,0,0,0,0,0,0])}}/>
+              <Input type='number' onChange={(e)=>{setLunch([0,0,0,e.target.value,0,0,0,0,0,0,0,0,0,0])}}/>
+              <Input type='number' onChange={(e)=>{setLunch([0,0,0,0,e.target.value,0,0,0,0,0,0,0,0,0])}}/>
+              <Input type='number' onChange={(e)=>{setLunch([0,0,0,0,0,e.target.value,0,0,0,0,0,0,0,0])}}/>
+              <Input type='number' onChange={(e)=>{setLunch([0,0,0,0,0,0,e.target.value,0,0,0,0,0,0,0])}}/>
+              <Input type='number' onChange={(e)=>{setLunch([0,0,0,0,0,0,0,e.target.value,0,0,0,0,0,0])}}/>
+              <Input type='number' onChange={(e)=>{setLunch([0,0,0,0,0,0,0,0,e.target.value,0,0,0,0,0])}}/>
+              <Input type='number' onChange={(e)=>{setLunch([0,0,0,0,0,0,0,0,0,e.target.value,0,0,0,0])}}/>
+              <Input type='number' onChange={(e)=>{setLunch([0,0,0,0,0,0,0,0,0,0,e.target.value,0,0,0])}}/>
+              <Input type='number' onChange={(e)=>{setLunch([0,0,0,0,0,0,0,0,0,0,0,e.target.value,0,0])}}/>
+              <Input type='number' onChange={(e)=>{setLunch([0,0,0,0,0,0,0,0,0,0,0,0,e.target.value,0])}}/>
+              <Input type='number' onChange={(e)=>{setLunch([0,0,0,0,0,0,0,0,0,0,0,0,0,e.target.value])}}/>
+            </div>
+
+            <div className='box'>
+              <h3>PM Snacks</h3>
+              <Input type='number' onChange={(e)=>{setPM([e.target.value,0,0,0,0,0,0,0,0,0,0,0,0,0])}}/>
+              <Input type='number' onChange={(e)=>{setPM([0,e.target.value,0,0,0,0,0,0,0,0,0,0,0,0])}}/>
+              <Input type='number' onChange={(e)=>{setPM([0,0,e.target.value,0,0,0,0,0,0,0,0,0,0,0])}}/>
+              <Input type='number' onChange={(e)=>{setPM([0,0,0,e.target.value,0,0,0,0,0,0,0,0,0,0])}}/>
+              <Input type='number' onChange={(e)=>{setPM([0,0,0,0,e.target.value,0,0,0,0,0,0,0,0,0])}}/>
+              <Input type='number' onChange={(e)=>{setPM([0,0,0,0,0,e.target.value,0,0,0,0,0,0,0,0])}}/>
+              <Input type='number' onChange={(e)=>{setPM([0,0,0,0,0,0,e.target.value,0,0,0,0,0,0,0])}}/>
+              <Input type='number' onChange={(e)=>{setPM([0,0,0,0,0,0,0,e.target.value,0,0,0,0,0,0])}}/>
+              <Input type='number' onChange={(e)=>{setPM([0,0,0,0,0,0,0,0,e.target.value,0,0,0,0,0])}}/>
+              <Input type='number' onChange={(e)=>{setPM([0,0,0,0,0,0,0,0,0,e.target.value,0,0,0,0])}}/>
+              <Input type='number' onChange={(e)=>{setPM([0,0,0,0,0,0,0,0,0,0,e.target.value,0,0,0])}}/>
+              <Input type='number' onChange={(e)=>{setPM([0,0,0,0,0,0,0,0,0,0,0,e.target.value,0,0])}}/>
+              <Input type='number' onChange={(e)=>{setPM([0,0,0,0,0,0,0,0,0,0,0,0,e.target.value,0])}}/>
+              <Input type='number' onChange={(e)=>{setPM([0,0,0,0,0,0,0,0,0,0,0,0,0,e.target.value])}}/>
+            </div>
+
+            <div className='box'>
+              <h3>Dinner</h3>
+              <Input type='number' onChange={(e)=>{setDinner([e.target.value,0,0,0,0,0,0,0,0,0,0,0,0,0])}}/>
+              <Input type='number' onChange={(e)=>{setDinner([0,e.target.value,0,0,0,0,0,0,0,0,0,0,0,0])}}/>
+              <Input type='number' onChange={(e)=>{setDinner([0,0,e.target.value,0,0,0,0,0,0,0,0,0,0,0])}}/>
+              <Input type='number' onChange={(e)=>{setDinner([0,0,0,e.target.value,0,0,0,0,0,0,0,0,0,0])}}/>
+              <Input type='number' onChange={(e)=>{setDinner([0,0,0,0,e.target.value,0,0,0,0,0,0,0,0,0])}}/>
+              <Input type='number' onChange={(e)=>{setDinner([0,0,0,0,0,e.target.value,0,0,0,0,0,0,0,0])}}/>
+              <Input type='number' onChange={(e)=>{setDinner([0,0,0,0,0,0,e.target.value,0,0,0,0,0,0,0])}}/>
+              <Input type='number' onChange={(e)=>{setDinner([0,0,0,0,0,0,0,e.target.value,0,0,0,0,0,0])}}/>
+              <Input type='number' onChange={(e)=>{setDinner([0,0,0,0,0,0,0,0,e.target.value,0,0,0,0,0])}}/>
+              <Input type='number' onChange={(e)=>{setDinner([0,0,0,0,0,0,0,0,0,e.target.value,0,0,0,0])}}/>
+              <Input type='number' onChange={(e)=>{setDinner([0,0,0,0,0,0,0,0,0,0,e.target.value,0,0,0])}}/>
+              <Input type='number' onChange={(e)=>{setDinner([0,0,0,0,0,0,0,0,0,0,0,e.target.value,0,0])}}/>
+              <Input type='number' onChange={(e)=>{setDinner([0,0,0,0,0,0,0,0,0,0,0,0,e.target.value,0])}}/>
+              <Input type='number' onChange={(e)=>{setDinner([0,0,0,0,0,0,0,0,0,0,0,0,0,e.target.value])}}/>
+            </div>
+
+            <div className='box'>
+              <h3>BS Snacks</h3>
+              <Input type='number' onChange={(e)=>{setBS([e.target.value,0,0,0,0,0,0,0,0,0,0,0,0,0])}}/>
+              <Input type='number' onChange={(e)=>{setBS([0,e.target.value,0,0,0,0,0,0,0,0,0,0,0,0])}}/>
+              <Input type='number' onChange={(e)=>{setBS([0,0,e.target.value,0,0,0,0,0,0,0,0,0,0,0])}}/>
+              <Input type='number' onChange={(e)=>{setBS([0,0,0,e.target.value,0,0,0,0,0,0,0,0,0,0])}}/>
+              <Input type='number' onChange={(e)=>{setBS([0,0,0,0,e.target.value,0,0,0,0,0,0,0,0,0])}}/>
+              <Input type='number' onChange={(e)=>{setBS([0,0,0,0,0,e.target.value,0,0,0,0,0,0,0,0])}}/>
+              <Input type='number' onChange={(e)=>{setBS([0,0,0,0,0,0,e.target.value,0,0,0,0,0,0,0])}}/>
+              <Input type='number' onChange={(e)=>{setBS([0,0,0,0,0,0,0,e.target.value,0,0,0,0,0,0])}}/>
+              <Input type='number' onChange={(e)=>{setBS([0,0,0,0,0,0,0,0,e.target.value,0,0,0,0,0])}}/>
+              <Input type='number' onChange={(e)=>{setBS([0,0,0,0,0,0,0,0,0,e.target.value,0,0,0,0])}}/>
+              <Input type='number' onChange={(e)=>{setBS([0,0,0,0,0,0,0,0,0,0,e.target.value,0,0,0])}}/>
+              <Input type='number' onChange={(e)=>{setBS([0,0,0,0,0,0,0,0,0,0,0,e.target.value,0,0])}}/>
+              <Input type='number' onChange={(e)=>{setBS([0,0,0,0,0,0,0,0,0,0,0,0,e.target.value,0])}}/>
+              <Input type='number' onChange={(e)=>{setBS([0,0,0,0,0,0,0,0,0,0,0,0,0,e.target.value])}}/>
+            </div>
+          </div>
+          
         </div>
       </section>
       
