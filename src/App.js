@@ -70,7 +70,6 @@ function App() {
 
 
   function changeREE(toval){
-    console.log("TOVAL:",current_weight,current_height,Age.Year);
     if(toval==="F"&& (Age.year>0 ||Age.month>0)){
       setREE(655.1+(9.6*current_weight)+(1.9*current_height*100)-(4.7*Age.year));
     }
@@ -429,20 +428,20 @@ function App() {
           <div className='flex scroll'>
             <div className='box'>
               <h3>Breakfast</h3>
-              <Input type='number' placeholder='0' inputProps={{step:0.1}} onChange={(e)=>{if (e.target.value<0){e.target.value=0;} else{setBreakfast([e.target.value,0,0,0,0,0,0,0,0,0,0,0,0,0])}}}/>
-              <Input type='number'placeholder='0' step={0.1} onChange={(e)=>{if (e.target.value<0){e.target.value=0;} else{setBreakfast([0,e.target.value,0,0,0,0,0,0,0,0,0,0,0,0])}}}/>
-              <Input type='number' placeholder='0' step={0.1} onChange={(e)=>{if (e.target.value<0){e.target.value=0;} else{setBreakfast([0,0,e.target.value,0,0,0,0,0,0,0,0,0,0,0])}}}/>
-              <Input type='number' placeholder='0' step={0.1} onChange={(e)=>{if (e.target.value<0){e.target.value=0;} else{setBreakfast([0,0,0,e.target.value,0,0,0,0,0,0,0,0,0,0])}}}/>
-              <Input type='number' placeholder='0' step={0.1} onChange={(e)=>{if (e.target.value<0){e.target.value=0;} else{setBreakfast([0,0,0,0,e.target.value,0,0,0,0,0,0,0,0,0])}}}/>
-              <Input type='number' placeholder='0' step={0.1} onChange={(e)=>{if (e.target.value<0){e.target.value=0;} else{setBreakfast([0,0,0,0,0,e.target.value,0,0,0,0,0,0,0,0])}}}/>
-              <Input type='number' placeholder='0' step={0.1} onChange={(e)=>{if (e.target.value<0){e.target.value=0;} else{setBreakfast([0,0,0,0,0,0,e.target.value,0,0,0,0,0,0,0])}}}/>
-              <Input type='number' placeholder='0' step={0.1} onChange={(e)=>{if (e.target.value<0){e.target.value=0;} else{setBreakfast([0,0,0,0,0,0,0,e.target.value,0,0,0,0,0,0])}}}/>
-              <Input type='number' placeholder='0' step={0.1} onChange={(e)=>{if (e.target.value<0){e.target.value=0;} else{setBreakfast([0,0,0,0,0,0,0,0,e.target.value,0,0,0,0,0])}}}/>
-              <Input type='number' placeholder='0' step={0.1} onChange={(e)=>{if (e.target.value<0){e.target.value=0;} else{setBreakfast([0,0,0,0,0,0,0,0,0,e.target.value,0,0,0,0])}}}/>
-              <Input type='number' placeholder='0' step={0.1} onChange={(e)=>{if (e.target.value<0){e.target.value=0;} else{setBreakfast([0,0,0,0,0,0,0,0,0,0,e.target.value,0,0,0])}}}/>
-              <Input type='number' placeholder='0' step={0.1} onChange={(e)=>{if (e.target.value<0){e.target.value=0;} else{setBreakfast([0,0,0,0,0,0,0,0,0,0,0,e.target.value,0,0])}}}/>
-              <Input type='number' placeholder='0' step={0.1} onChange={(e)=>{if (e.target.value<0){e.target.value=0;} else{setBreakfast([0,0,0,0,0,0,0,0,0,0,0,0,e.target.value,0])}}}/>
-              <Input type='number' placeholder='0' step={0.1} onChange={(e)=>{if (e.target.value<0){e.target.value=0;} else{setBreakfast([0,0,0,0,0,0,0,0,0,0,0,0,0,e.target.value])}}}/>
+              <Input type='number' placeholder='0' onChange={(e)=>{if (e.target.value<0){e.target.value=0;} else{setBreakfast([e.target.value,0,0,0,0,0,0,0,0,0,0,0,0,0])}}}/>
+              <Input type='number'placeholder='0' onChange={(e)=>{if (e.target.value<0){e.target.value=0;} else{setBreakfast([0,e.target.value,0,0,0,0,0,0,0,0,0,0,0,0])}}}/>
+              <Input type='number' placeholder='0' onChange={(e)=>{if (e.target.value<0){e.target.value=0;} else{setBreakfast([0,0,e.target.value,0,0,0,0,0,0,0,0,0,0,0])}}}/>
+              <Input type='number' placeholder='0' onChange={(e)=>{if (e.target.value<0){e.target.value=0;} else{setBreakfast([0,0,0,e.target.value,0,0,0,0,0,0,0,0,0,0])}}}/>
+              <Input type='number' placeholder='0' onChange={(e)=>{if (e.target.value<0){e.target.value=0;} else{setBreakfast([0,0,0,0,e.target.value,0,0,0,0,0,0,0,0,0])}}}/>
+              <Input type='number' placeholder='0' onChange={(e)=>{if (e.target.value<0){e.target.value=0;} else{setBreakfast([0,0,0,0,0,e.target.value,0,0,0,0,0,0,0,0])}}}/>
+              <Input type='number' placeholder='0' onChange={(e)=>{if (e.target.value<0){e.target.value=0;} else{setBreakfast([0,0,0,0,0,0,e.target.value,0,0,0,0,0,0,0])}}}/>
+              <Input type='number' placeholder='0' onChange={(e)=>{if (e.target.value<0){e.target.value=0;} else{setBreakfast([0,0,0,0,0,0,0,e.target.value,0,0,0,0,0,0])}}}/>
+              <Input type='number' placeholder='0' onChange={(e)=>{if (e.target.value<0){e.target.value=0;} else{setBreakfast([0,0,0,0,0,0,0,0,e.target.value,0,0,0,0,0])}}}/>
+              <Input type='number' placeholder='0' onChange={(e)=>{if (e.target.value<0){e.target.value=0;} else{setBreakfast([0,0,0,0,0,0,0,0,0,e.target.value,0,0,0,0])}}}/>
+              <Input type='number' placeholder='0' onChange={(e)=>{if (e.target.value<0){e.target.value=0;} else{setBreakfast([0,0,0,0,0,0,0,0,0,0,e.target.value,0,0,0])}}}/>
+              <Input type='number' placeholder='0' onChange={(e)=>{if (e.target.value<0){e.target.value=0;} else{setBreakfast([0,0,0,0,0,0,0,0,0,0,0,e.target.value,0,0])}}}/>
+              <Input type='number' placeholder='0' onChange={(e)=>{if (e.target.value<0){e.target.value=0;} else{setBreakfast([0,0,0,0,0,0,0,0,0,0,0,0,e.target.value,0])}}}/>
+              <Input type='number' placeholder='0' onChange={(e)=>{if (e.target.value<0){e.target.value=0;} else{setBreakfast([0,0,0,0,0,0,0,0,0,0,0,0,0,e.target.value])}}}/>
             </div>
 
             <div className='box'>
