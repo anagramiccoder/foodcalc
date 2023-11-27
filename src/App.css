@@ -70,7 +70,6 @@ section{
 }
 .titles{
   width: 20%;
-  align-items:start;
   display:flex;
   flex-direction: column;
 }

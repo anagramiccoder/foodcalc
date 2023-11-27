@@ -70,6 +70,8 @@ function App() {
 
 
   function changeREE(toval){
+    setNPC([0,0,0]);
+    console.log(Breakfast,AM,Lunch,PM,Dinner,BS);
     if(toval==="F"&& (Age.year>0 ||Age.month>0)){
       setREE(655.1+(9.6*current_weight)+(1.9*current_height*100)-(4.7*Age.year));
     }
